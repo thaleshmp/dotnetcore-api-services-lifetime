@@ -1,12 +1,24 @@
-
-@model IList<string>
+@model IList<dotnetcore_api_services_lifetime.Models.IOCServiceResult>
 <html>
     <body>
-        @foreach(var item in Model)
-        {
-            <ul>
-                <li>@item</li>
-            </ul>
-        }
+        <table>
+            <thead>
+                <tr>
+                    <th>Lifetime Type</th>
+                    <th>IOC Injection Value</th>
+                    <th>ServiceLocator Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                    <tr>
+                        <td>@item.LifetimeType</td>
+                        <td>@item.SVCLocatorValue</td>
+                        <td>@item.IOCValue</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </body>
 </html>
