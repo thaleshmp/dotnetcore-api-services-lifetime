@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using dotnetcore_api_services_lifetime.Services;
+using dotnetcore_api_services_lifetime.Services.Collector;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,14 @@ namespace dotnetcore_api_services_lifetime
             services.AddScoped(typeof(IScopedService), typeof(ScopedService));
             services.AddTransient(typeof(ITransientService), typeof(TransientService));
             services.AddSingleton(typeof(ISingletonService), typeof(SingletonService));
+
+            services.AddScoped(typeof(IEnumerable<ICollector>), (provider) => {
+                return new List<ICollector>(){
+                    new TextCollector(),
+                    new TableCollector(),
+                    new BodyCollector()
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
